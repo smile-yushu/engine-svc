@@ -1,0 +1,50 @@
+server:
+  port: 30025
+spring:
+  application:
+    name: engine
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      max-file-size: 6000MB
+      max-request-size: 6000MB
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.31.144:3306/pcc?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    #    url: jdbc:mysql://localhost:3306/pcc?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: 123456
+
+  cloud:
+    nacos:
+      config:
+        server-addr:  192.168.31.144:8858
+
+      file-extension: yaml
+      discovery:
+        server-addr: 192.168.31.144:8858
+  redis:
+    host: 192.168.31.144
+    port: 6379
+    database: 0 #????0????
+    jedis:
+      #Redis?????
+      pool:
+        max-active: 8 #?????
+        max-wait: 1ms #???????????
+        max-idle: 4 #???????????
+        min-idle: 0 #???????????
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:mapper/*.xml
+netty:
+  server:
+    port: 30099
+
+
+

@@ -1,0 +1,93 @@
+//使用 proto3 语法 ,未指定则使用proto2
+syntax = "proto3";
+
+//生成 proto 文件所在包路径
+package com.yushu.engine;
+
+//生成 proto 文件所在包路径
+option java_package = "";
+
+//生成 proto 文件名
+option java_outer_classname="BaseMsg";
+
+message LoginMsg{
+  // 消息唯一ID
+  int32 id = 1;
+  // 登录初始化内容
+  string content = 2;
+  // computerID
+  int32 computer_id = 3;
+  // computerNME
+  string computer_name = 4;
+  //类型，1 = Login 、2 = Quit、3 = Heartbeat、4 = ComputerMsg、5 = ResultMsg
+  int32 type = 5;
+}
+message QuitMsg{
+  // 消息唯一ID
+  int32 id = 1;
+  // bool
+  bool quit = 2;
+  //类型，1 = Login 、2 = Quit、3 = Heartbeat、4 = ComputerMsg、5 = ResultMsg
+  int32 type = 3;
+}
+message HeartbeatMsg{
+  // 消息唯一ID
+  int32 id = 1;
+  // 心跳请求是否成功
+  bool hb_request = 2;
+  //类型，1 = Login 、2 = Quit、3 = Heartbeat、4 = ComputerMsg、5 = ResultMsg
+  int32 type = 3;
+}
+message ComputerMsg{
+  // 消息唯一ID
+  int32 id = 1;
+  //类型，1 = Login 、2 = Quit、3 = Heartbeat、4 = ComputerMsg、5 = ResultMsg
+  int32 type = 2;
+  //IP地址
+  string ip = 3;
+  // 电脑名
+  string mac_name = 4;
+  // CPU使用率
+  string cpu_usage = 5;
+  // 内存大小
+  string cpu_memory_count = 6;
+  // 可用内存大小
+  string cpu_able_memory = 7;
+  // 硬盘大小
+  string disk_cap = 8;
+  // 可用硬盘大小
+  string able_disk_cap = 9;
+  // GPU使用
+  string gpu_usage = 10;
+  // GPU内存
+  string gpu_memory = 11;
+  // GPU可用内存
+  string gpu_able_memory = 12;
+}
+message ResultMsg {
+
+  // 消息唯一ID
+  int32 id = 1;
+  // 是否成功
+  bool is_success = 2;
+  // 状态码
+  ErrorType status_code = 3;
+  // 错误消息
+  string message = 4;
+  //类型，1 = Login 、2 = Quit、3 = Heartbeat、4 = ComputerMsg、5 = ResultMsg
+  int32 type = 5;
+  //消息类型
+  enum ErrorType {
+    // 成功
+    OK = 0;
+    // 失败
+    Error = 1;
+    // 程序异常
+    AppThrow = 2;
+    //下载失败
+    DownloadFailed = 3;
+
+  };
+
+
+}
